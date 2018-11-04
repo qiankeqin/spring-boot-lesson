@@ -1,11 +1,10 @@
-package com.segmentfault.springbootlesson5.filter;
+package com.segmentfault.springbootlesson5.boot;
 
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -14,16 +13,14 @@ import java.io.IOException;
  * @program: spring-boot-lesson
  * @description:
  * @author: qiankeqin
- * @create: 2018-11-04 15:43
+ * @create: 2018-11-04 17:31
  **/
-@WebFilter(servletNames = "myServlet")
-public class MyFilter extends OncePerRequestFilter{
-
+public class MyFilter2 extends OncePerRequestFilter{
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         ServletContext servletContext = httpServletRequest.getServletContext();
-        String requestURI = httpServletRequest.getRequestURI();
-        servletContext.log(requestURI+",/myservlet was filtered!");
+        String requestURL = httpServletRequest.getRequestURI();
+        servletContext.log(requestURL + " ,myfilter2 filtered");
 
         filterChain.doFilter(httpServletRequest,httpServletResponse);
     }
