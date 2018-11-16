@@ -31,15 +31,40 @@ public class JdbcController {
     @Autowired
     private UserService userService;
 
+    /**
+     * 判断是否支持事务
+     * @return
+     */
+    @RequestMapping(value="/jdbc/meta/transaction/supported")
+    public Boolean supportedtransaction(){
+        boolean supported = false;
+        Connection connection = null;
+
+        try{
+            connection = dataSource.getConnection();
+
+            DatabaseMetaData metaData = connection.getMetaData();
+
+            supported = metaData.supportsTransactions();
+
+        } catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+        return supported;
+    }
+
     @RequestMapping("/user/get")
     public Map<String,Object> getUser(@RequestParam(value="id",defaultValue = "") int id){
 
         Map<String,Object> data = new HashMap<>();
 
         Connection connection = null;
+        Savepoint savepoint = null;
         try {
             connection = dataSource.getConnection();
 //            Statement statement = connection.createStatement();
+            connection.setAutoCommit(false);
+            savepoint = connection.setSavepoint();
             PreparedStatement statement = connection.prepareStatement("select id,name,age from user where id = ?");
             statement.setInt(1,id);
             ResultSet resultSet = statement.executeQuery();
@@ -53,12 +78,15 @@ public class JdbcController {
                 data.put("name",name);
                 data.put("age",age);
             }
+
+            connection.commit();
             return data;
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
             try {
                 connection.close();
+                connection.setAutoCommit(true);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

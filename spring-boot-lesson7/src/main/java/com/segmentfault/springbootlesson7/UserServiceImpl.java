@@ -6,6 +6,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
@@ -24,6 +26,7 @@ public class UserServiceImpl implements UserService{
     private JdbcTemplate jdbcTemplate;
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.SERIALIZABLE)
     public boolean save(User user) {
         return jdbcTemplate.execute("insert into user(name,age) value(?,?)", new PreparedStatementCallback<Boolean>() {
             @Override
