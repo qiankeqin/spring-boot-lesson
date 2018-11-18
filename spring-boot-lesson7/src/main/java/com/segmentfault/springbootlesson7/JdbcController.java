@@ -5,12 +5,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
+import org.springframework.jdbc.core.StatementCallback;
 import org.springframework.web.bind.annotation.*;
 
 import javax.sql.DataSource;
 import java.sql.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @program: spring-boot-lesson
@@ -30,6 +30,36 @@ public class JdbcController {
 
     @Autowired
     private UserService userService;
+
+
+    @RequestMapping("/getUsers")
+    public List<Map<String,Object>> getUsers(){
+        return jdbcTemplate.execute(new StatementCallback<List<Map<String,Object>>>() {
+            @Override
+            public List<Map<String, Object>> doInStatement(Statement statement) throws SQLException, DataAccessException {
+                ResultSet resultSet = statement.executeQuery("select * from user");
+                ResultSetMetaData metaData = resultSet.getMetaData();
+                int columnCount = metaData.getColumnCount();
+                List<String> columnNames = new ArrayList<>(columnCount);
+                for(int i=1;i<=columnCount;i++){
+                    String columnName = metaData.getColumnName(i);
+                    columnNames.add(columnName);
+                }
+
+                List<Map<String,Object>> data = new LinkedList<>();
+                while(resultSet.next()){
+                    Map<String,Object> columnData = new LinkedHashMap<>();
+                    for(String columnName:columnNames){
+                        Object object = resultSet.getObject(columnName);
+                        columnData.put(columnName,object);
+                    }
+                    data.add(columnData);
+                }
+
+                return data;
+            }
+        });
+    }
 
     /**
      * 判断是否支持事务
