@@ -3,19 +3,30 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-    <properties resource="mybatis/mybatis-config.xml"></properties>
+    <properties resource="mybatis/mybatis.properties"></properties>
     <settings>
         <setting name="cacheEnabled" value="true"/>
     </settings>
+    <typeAliases>
+        <typeAlias alias="MY_DB_VENDOR" type="com.segmentfault.springbootlesson8.mapping.MyVendorDatabaseidProvider" ></typeAlias>
+    </typeAliases>
     <environments default="dev">
         <environment id="dev">
             <transactionManager type="JDBC"></transactionManager>
             <dataSource type="POOLED">
-                <property name="driver" value="${jdbc.driver-class}"/>
+                <property name="driver" value="${jdbc.driverClass}"/>
                 <property name="url" value="${jdbc.url}"/>
                 <property name="username" value="${jdbc.username}"/>
                 <property name="password" value="${jdbc.password}"/>
             </dataSource>
         </environment>
     </environments>
+
+    <databaseIdProvider type="MY_DB_VENDOR">
+        <property name="MySQL" value="mysql"/>
+    </databaseIdProvider>
+
+    <mappers>
+        <mapper resource="mybatis/mappers/UserMapper.xml"></mapper>
+    </mappers>
 </configuration>
