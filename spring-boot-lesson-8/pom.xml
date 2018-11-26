@@ -68,6 +68,14 @@
 				<configuration>
 					<configurationFile>${basedir}/src/main/resources/mybatis/mybatis-generator-config.xml</configurationFile>
 				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>mysql</groupId>
+						<artifactId>mysql-connector-java</artifactId>
+						<scope>runtime</scope>
+						<version>5.1.42</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 
 		</plugins>
