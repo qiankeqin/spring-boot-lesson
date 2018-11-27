@@ -28,5 +28,7 @@
 
     <mappers>
         <mapper resource="mybatis/mappers/UserMapper.xml"></mapper>
+        <mapper resource="mybatis/mappers/UserMapper-1.xml"></mapper>
+        <mapper class="com.segmentfault.springbootlesson8.annotation.UserMapper"></mapper>
     </mappers>
 </configuration>

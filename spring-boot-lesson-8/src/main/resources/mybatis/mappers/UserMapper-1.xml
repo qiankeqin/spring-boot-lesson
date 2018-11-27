@@ -3,13 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.segmentfault.springbootlesson8.mapper.UserMapper">
-    <resultMap id="UserResultMap" type="com.segmentfault.springbootlesson8.entity.User">
+    <resultMap id="UserResultMap2" type="com.segmentfault.springbootlesson8.entity.User">
         <id property="id" column="id"/>
         <result property="name" column="name" javaType="java.lang.String"/>
         <result property="ages" column="age" javaType="java.lang.Integer"/>
     </resultMap>
 
-    <select id="selectOneUser" parameterType="int" resultMap="UserResultMap">
+    <select id="selectOneUser2" parameterType="int" resultMap="UserResultMap2">
         select id,name,age from user where id=#{id}
     </select>
 </mapper>
