@@ -8,8 +8,8 @@ package com.segmentfault.springbootlesson8.entity;
  **/
 public class User {
     private Integer id;
-    private String name;
-    private Integer ages;
+
+    private Description description;
 
     public Integer getId() {
         return id;
@@ -19,19 +19,11 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Description getDescription() {
+        return description;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getAges() {
-        return ages;
-    }
-
-    public void setAges(Integer ages) {
-        this.ages = ages;
+    public void setDescription(Description description) {
+        this.description = description;
     }
 }

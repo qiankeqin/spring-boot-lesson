@@ -10,9 +10,10 @@ public interface UserMapper {
     @Results(value={
             @Result(property = "id",column = "id", id=true ),
             @Result(property = "name",column = "name"),
-            @Result(property = "ages",column = "age")
+            @Result(property = "ages",column = "age"),
+            @Result(property = "description",column = "desc")
     })
-    @Select("select id,name,age from user where id=#{id} ")
+    @Select("select id,name,age,desc from user where id=#{id} ")
     User selectUser(int id);
 
 }

@@ -21,7 +21,7 @@ public class UserController {
 
     @RequestMapping("/user/{id}")
     public User user(@PathVariable(value="id") int id){
-        User user = sqlSessionTemplate.selectOne("com.segmentfault.springbootlesson8.mapper.UserMapper.selectOneUser", 2);
+        User user = sqlSessionTemplate.selectOne("com.segmentfault.springbootlesson8.mapper.UserMapper.selectOneUser2", id);
         return user;
     }
 }

@@ -5,11 +5,12 @@
 <mapper namespace="com.segmentfault.springbootlesson8.mapper.UserMapper">
     <resultMap id="UserResultMap2" type="com.segmentfault.springbootlesson8.entity.User">
         <id property="id" column="id"/>
-        <result property="name" column="name" javaType="java.lang.String"/>
-        <result property="ages" column="age" javaType="java.lang.Integer"/>
+        <!--<result property="name" column="name" javaType="java.lang.String"/>-->
+        <!--<result property="ages" column="age" javaType="java.lang.Integer"/>-->
+        <result property="description" column="desc" typeHandler="com.segmentfault.springbootlesson8.handler.DescriptionTypeHandler"/>
     </resultMap>
 
     <select id="selectOneUser2" parameterType="int" resultMap="UserResultMap2">
-        select id,name,age from user where id=#{id}
+        select id,`desc` from user where id=#{id}
     </select>
 </mapper>
