@@ -22,6 +22,17 @@ public class Customer {
     @OneToOne
     private CreditCard creditCard;
 
+    @ManyToOne
+    private Store store;
+
+    public Store getStore() {
+        return store;
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
+    }
+
     public Long getId() {
         return id;
     }
