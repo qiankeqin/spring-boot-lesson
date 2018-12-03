@@ -1,6 +1,7 @@
 package com.segmentfault.springbootlesson9.entity;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
  * @program: spring-boot-lesson
@@ -24,6 +25,9 @@ public class Customer {
 
     @ManyToOne
     private Store store;
+
+    @ManyToMany
+    private Collection<Book> books;
 
     public Store getStore() {
         return store;
