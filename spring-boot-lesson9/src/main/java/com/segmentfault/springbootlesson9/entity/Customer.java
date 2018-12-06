@@ -1,5 +1,7 @@
 package com.segmentfault.springbootlesson9.entity;
 
+import com.segmentfault.springbootlesson9.entity.listener.CustomerListener;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -12,6 +14,7 @@ import java.util.Collection;
 @Entity
 @Access(value= AccessType.FIELD)
 @Table(name="customers")
+@EntityListeners(value={CustomerListener.class})
 public class Customer {
     @Id
     @GeneratedValue
@@ -59,5 +62,16 @@ public class Customer {
 
     public void setCreditCard(CreditCard creditCard) {
         this.creditCard = creditCard;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", creditCard=" + creditCard +
+                ", store=" + store +
+                ", books=" + books +
+                '}';
     }
 }
