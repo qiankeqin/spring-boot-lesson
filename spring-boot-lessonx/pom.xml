@@ -43,6 +43,13 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 		</dependency>
+
+		<!-- JNA dependency -->
+		<dependency>
+			<groupId>org.elasticsearch</groupId>
+			<artifactId>jna</artifactId>
+			<version>4.4.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
