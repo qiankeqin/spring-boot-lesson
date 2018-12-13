@@ -6,6 +6,8 @@ import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 /**
@@ -22,7 +24,8 @@ public class CacheConfiguration {
         SimpleCacheManager simpleCacheManager = new SimpleCacheManager();
 
         ConcurrentMapCache cache = new ConcurrentMapCache("cache-1");//必须要有cache名称
-        simpleCacheManager.setCaches(Collections.singleton(cache));
+        ConcurrentMapCache persons = new ConcurrentMapCache("persons");//必须要有cache名称
+        simpleCacheManager.setCaches(Arrays.asList(cache,persons));
         return simpleCacheManager;
     }
 }
