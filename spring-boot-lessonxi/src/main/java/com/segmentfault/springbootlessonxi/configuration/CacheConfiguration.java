@@ -1,6 +1,7 @@
 package com.segmentfault.springbootlessonxi.configuration;
 
 import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.concurrent.ConcurrentMapCache;
 import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
@@ -17,6 +18,7 @@ import java.util.Collections;
  * @create: 2018-12-13 13:02
  **/
 @Configuration
+@EnableCaching
 public class CacheConfiguration {
 
     @Bean
