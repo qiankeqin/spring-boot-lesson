@@ -15,7 +15,7 @@ public class Person {
     private String name;
 
     @Min(value = 0)
-    @Max(value = 200,message = "你见过有这么大的人吗？")
+    @Max(value = 200,message = "{person.age.max.message}")
     private int age;
 
     public String getName() {
