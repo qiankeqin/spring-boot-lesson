@@ -1,5 +1,7 @@
 package com.segmentfault.springbootlessonxiii.domain;
 
+import com.segmentfault.springbootlessonxiii.annotation.validator.PersonName;
+
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -12,6 +14,7 @@ import javax.validation.constraints.NotNull;
  **/
 public class Person {
     @NotNull
+    @PersonName(prefix = "segmentfault")
     private String name;
 
     @Min(value = 0)
