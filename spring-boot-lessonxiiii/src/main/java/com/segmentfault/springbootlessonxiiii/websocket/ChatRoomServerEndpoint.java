@@ -13,7 +13,7 @@ import java.io.IOException;
  * @create: 2019-01-12 22:01
  **/
 @ServerEndpoint("/chat-room/{username}")
-public class ChatRoomServletEndpoint {
+public class ChatRoomServerEndpoint {
 
     /**
      * 打开Session时

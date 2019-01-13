@@ -6,6 +6,51 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
 <body>
+    聊天消息内容：
+    <textarea id="text_chat_content" readonly="readonly"></textarea>
 
+    <br/>
+    用户：<input id="in_user_name" value=""/><button id="btn_connect">加入聊天室</button><button id="btn_disconnect">离开聊天室</button>
+    <br/>
+    消息内容：<input id="in_msg" vlaue=""/><button id="btn_send">发送</button>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var urlPrefix = "ws://localhost:8080/chat-room/";
+        var ws = null;
+        $('#btn_connect').click(function(){
+           var username = $("#in_user_name").val();
+           var url = urlPrefix + username;
+           ws = new WebSocket(url);
+
+           ws.onopen = function(event){
+
+           };
+
+           ws.onmessage = function(event){
+               //服务端发送消息
+               $("#text_chat_content").append(event.data+'\n');
+           };
+
+           ws.onclose = function(){
+               $("#text_chat_content").append('用户【'+username+'】已经离开了聊天室！'+'\n');
+           };
+
+        });
+
+        //客户端发送消息
+        $("#btn_send").click(function(){
+            var msg = $('#in_msg').val();
+            if(ws){
+                ws.send(msg);
+            }
+        });
+
+        $('#btn_disconnect').click(function(){
+            if(ws){
+                ws.close();
+            }
+        })
+    })
+</script>
 </body>
 </html>
